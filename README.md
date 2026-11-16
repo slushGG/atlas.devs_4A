@@ -98,7 +98,7 @@ HTML5, CSS3, JavaScript, Laravel, MySQL, React Native, Expo, and Laragon.
 The repository includes the WordPress installation under `wordpress/`. The custom theme is located at:
 
 ```text
-wordpress/wp-content/themes/Devenci WP [V1.0.5]/
+wordpress/wp-content/themes/Devenci WP [V1.0.8]/
 ```
 
 For a fresh WordPress installation:
