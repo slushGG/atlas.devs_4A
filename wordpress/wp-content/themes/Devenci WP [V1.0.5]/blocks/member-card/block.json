@@ -25,6 +25,10 @@
 			"type": "string",
 			"default": ""
 		},
+		"position": {
+			"type": "number",
+			"default": 0
+		},
 		"delay": {
 			"type": "string",
 			"default": "0s"

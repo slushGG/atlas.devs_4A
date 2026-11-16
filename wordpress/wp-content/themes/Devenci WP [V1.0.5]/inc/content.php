@@ -544,12 +544,13 @@ function devenci_group_about_content() {
 function devenci_home_page_content( $cards ) {
 	$members = '';
 
-	foreach ( $cards as $card ) {
+	foreach ( $cards as $index => $card ) {
 		$members .= '<!-- wp:devenci/member-card ' . devenci_block_attrs(
 			array(
 				'url'      => $card['url'],
 				'imageId'  => (int) $card['image'],
 				'imageAlt' => $card['alt'],
+				'position' => $index + 1,
 				'delay'    => $card['delay'],
 			)
 		) . " -->\n"
