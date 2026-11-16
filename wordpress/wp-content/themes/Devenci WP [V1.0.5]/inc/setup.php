@@ -29,6 +29,22 @@ function devenci_setup() {
 }
 add_action( 'after_setup_theme', 'devenci_setup' );
 
+function devenci_front_page_document_title( $title ) {
+	if ( ! is_front_page() ) {
+		return $title;
+	}
+
+	$front_page_id = (int) get_option( 'page_on_front' );
+	if ( ! $front_page_id ) {
+		return $title;
+	}
+
+	$front_page_title = get_the_title( $front_page_id );
+
+	return $front_page_title ? $front_page_title : $title;
+}
+add_filter( 'pre_get_document_title', 'devenci_front_page_document_title' );
+
 // Register the pattern categories used by the bundled patterns
 function devenci_register_pattern_categories() {
 	register_block_pattern_category(
