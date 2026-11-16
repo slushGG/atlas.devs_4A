@@ -29,6 +29,13 @@ function devenci_setup() {
 }
 add_action( 'after_setup_theme', 'devenci_setup' );
 
+function devenci_document_title_parts( $title_parts ) {
+	$title_parts['site'] = 'Atlas-Devs [4A]';
+
+	return $title_parts;
+}
+add_filter( 'document_title_parts', 'devenci_document_title_parts' );
+
 // Register the pattern categories used by the bundled patterns
 function devenci_register_pattern_categories() {
 	register_block_pattern_category(
