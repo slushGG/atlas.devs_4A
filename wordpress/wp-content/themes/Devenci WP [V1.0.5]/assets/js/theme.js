@@ -219,7 +219,7 @@
       return;
     }
 
-    var sections = document.querySelectorAll(".devenci-section");
+    var sections = document.querySelectorAll(".devenci-section, .ag-section");
 
     sections.forEach(function (section) {
       section.classList.add("devenci-reveal");
@@ -234,7 +234,10 @@
           }
         });
       },
-      { threshold: 0.05 },
+      // threshold 0 reveals as soon as any part of the section enters the
+      // viewport; a fixed ratio would never trigger on sections taller than
+      // the viewport (e.g. the about section on phones / short windows).
+      { threshold: 0 },
     );
 
     sections.forEach(function (section) {

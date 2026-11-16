@@ -161,12 +161,9 @@ function devenci_member_one_data() {
 		'name'              => 'Tyrone Parreño',
 		'role'              => 'Dev Venci',
 		'profile'           => 'profile',
-		'about_image'       => 'about',
 		'hero_subtitle'     => "Hi There! I'm a",
 		'hero_title'        => 'WEB3 ENTHUSIAST',
 		'intro'             => 'Passionate about building and growing Web3 communities while contributing to the future of decentralized ecosystems. Specializing in NFT trading analysis, community management, and Web3 engagement strategies.',
-		'experience_number' => '2',
-		'experience_text'   => 'Years of Experience',
 		'about_paragraphs'  => array(
 			"I'm a passionate Web3 enthusiast with 2 years of hands-on experience in the blockchain ecosystem. My journey began with active participation in crypto communities, where I developed expertise in managing and growing Web3 communities.",
 			"Beyond development, I'm an experienced trader specializing in meme coins and NFTs, with a keen eye for market trends and opportunities. I combine technical knowledge with trading experience to navigate the dynamic Web3 landscape effectively.",
@@ -238,12 +235,9 @@ function devenci_member_starter_data( $index ) {
 		'name'              => 'Member ' . $index,
 		'role'              => 'Role',
 		'profile'           => '',
-		'about_image'       => '',
 		'hero_subtitle'     => "Hi There! I'm",
 		'hero_title'        => 'MEMBER ' . $index,
 		'intro'             => 'Replace this introduction with a short summary of who you are, what you do, and the kind of work you enjoy.',
-		'experience_number' => '0',
-		'experience_text'   => 'Years of Experience',
 		'about_paragraphs'  => array(
 			'Use this space to tell visitors about your background, the projects you have worked on, and what you are currently learning.',
 			'Add a second paragraph with the work you enjoy most, the tools you use, and the kind of collaborations you are looking for.',
@@ -339,16 +333,6 @@ function devenci_member_page_content( $data, $media ) {
 		$about_info .= devenci_paragraph( '<strong>' . esc_html( $info[0] ) . '</strong> ' . esc_html( $info[1] ), 'info-item' );
 	}
 
-	$about_image = devenci_group(
-		devenci_image_block( $media_id( $data['about_image'] ), 'image-wrapper', $data['name'] )
-		. devenci_group(
-			devenci_heading( $data['experience_number'], 3, 'experience-number' )
-			. devenci_paragraph( $data['experience_text'], 'experience-text' ),
-			'experience-box'
-		),
-		'about-image'
-	);
-
 	$about_text = devenci_group(
 		devenci_paragraph( $data['about_paragraphs'][0] )
 		. devenci_paragraph( $data['about_paragraphs'][1] )
@@ -362,7 +346,7 @@ function devenci_member_page_content( $data, $media ) {
 		'section-about',
 		devenci_container(
 			devenci_section_header( 'ABOUT ME' )
-			. devenci_columns( array( $about_image, $about_text ), 'about-content' )
+			. devenci_columns( array( $about_text ), 'about-content' )
 		)
 	);
 
