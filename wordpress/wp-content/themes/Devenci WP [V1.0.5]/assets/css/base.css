@@ -492,6 +492,10 @@ button.icon-paper-plane::after {
   padding-top: 60px;
 }
 
+.section-about .section-header {
+  margin-bottom: 1.5rem;
+}
+
 .section-about .about-content.wp-block-columns {
   display: block;
   max-width: 800px;

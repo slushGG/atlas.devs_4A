@@ -525,6 +525,21 @@ function devenci_member_page_content( $data, $media ) {
 	return $home_section . $about_section . $services_section . $portfolio_section . $resume_section . $blog_section . $contact_section;
 }
 
+// Read the editable About section used on the group homepage
+function devenci_group_about_content() {
+	$path    = get_theme_file_path( 'assets/content/group-about.html' );
+	$content = file_get_contents( $path );
+
+	if ( false === $content ) {
+		return new WP_Error(
+			'devenci_group_about_unavailable',
+			__( 'The group About section could not be loaded.', 'devenci' )
+		);
+	}
+
+	return trim( $content );
+}
+
 // Build the group homepage
 function devenci_home_page_content( $cards ) {
 	$members = '';
@@ -549,8 +564,17 @@ function devenci_home_page_content( $cards ) {
 		'group-intro'
 	);
 
-	return devenci_group(
-		$hero . devenci_group( $members, 'members' ),
-		'group-main'
+	$scroll_indicator = devenci_html(
+		'<div class="scroll-indicator" aria-hidden="true"><span class="mouse"><span class="wheel"></span></span><span class="scroll-text">Scroll Down</span></div>'
 	);
+	$about_content    = devenci_group_about_content();
+
+	if ( is_wp_error( $about_content ) ) {
+		return $about_content;
+	}
+
+	return devenci_group(
+		$hero . devenci_group( $members, 'members' ) . $scroll_indicator,
+		'group-main'
+	) . "\n" . $about_content;
 }

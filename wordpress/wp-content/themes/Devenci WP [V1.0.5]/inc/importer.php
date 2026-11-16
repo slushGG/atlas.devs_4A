@@ -124,21 +124,29 @@ function devenci_import_demo_content() {
 			),
 		);
 
-		$home_id = wp_insert_post(
-			array(
-				'post_title'   => 'TeamKU-4A',
-				'post_name'    => 'home',
-				'post_status'  => 'publish',
-				'post_type'    => 'page',
-				'post_content' => devenci_home_page_content( $cards ),
-			),
-			true
-		);
+		$home_content = devenci_home_page_content( $cards );
 
-		if ( is_wp_error( $home_id ) ) {
+		if ( is_wp_error( $home_content ) ) {
+			$errors[] = $home_content->get_error_message();
 			$home_id = 0;
 		} else {
-			$pages_created++;
+			$home_id = wp_insert_post(
+				array(
+					'post_title'   => 'TeamKU-4A',
+					'post_name'    => 'home',
+					'post_status'  => 'publish',
+					'post_type'    => 'page',
+					'post_content' => $home_content,
+				),
+				true
+			);
+
+			if ( is_wp_error( $home_id ) ) {
+				$errors[] = $home_id->get_error_message();
+				$home_id = 0;
+			} else {
+				$pages_created++;
+			}
 		}
 	}
 
@@ -173,6 +181,50 @@ function devenci_maybe_import_demo() {
 }
 add_action( 'after_switch_theme', 'devenci_maybe_import_demo' );
 add_action( 'admin_init', 'devenci_maybe_import_demo' );
+
+function devenci_migrate_group_about_content() {
+	if ( get_option( 'devenci_group_about_content_migrated' ) || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$home_id = (int) get_option( 'page_on_front' );
+	if ( ! $home_id ) {
+		$home_page = get_page_by_path( 'home' );
+		$home_id   = $home_page ? (int) $home_page->ID : 0;
+	}
+
+	$home_page = $home_id ? get_post( $home_id ) : null;
+	if ( ! $home_page || 'page' !== $home_page->post_type ) {
+		return;
+	}
+
+	if ( false !== strpos( $home_page->post_content, 'id="about-group"' ) ) {
+		update_option( 'devenci_group_about_content_migrated', time() );
+		return;
+	}
+
+	$about_content = devenci_group_about_content();
+	if ( is_wp_error( $about_content ) ) {
+		error_log( $about_content->get_error_message() );
+		return;
+	}
+
+	$result = wp_update_post(
+		array(
+			'ID'           => $home_id,
+			'post_content' => rtrim( $home_page->post_content ) . "\n" . $about_content,
+		),
+		true
+	);
+
+	if ( is_wp_error( $result ) ) {
+		error_log( $result->get_error_message() );
+		return;
+	}
+
+	update_option( 'devenci_group_about_content_migrated', time() );
+}
+add_action( 'admin_init', 'devenci_migrate_group_about_content', 20 );
 
 // Add a setup screen for re-running the import
 function devenci_register_setup_page() {
@@ -253,7 +305,7 @@ function devenci_render_setup_page() {
 			<p>
 				<button type="submit" class="button" name="devenci_import_demo" value="1"><?php esc_html_e( 'Import Missing Pages and Images', 'devenci' ); ?></button>
 			</p>
-			<p class="description"><?php esc_html_e( 'Existing pages are left untouched. Only missing pages and attachments are created.', 'devenci' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Existing page content is preserved; the group About section is added to the homepage once if it is missing.', 'devenci' ); ?></p>
 		</form>
 	</div>
 	<?php

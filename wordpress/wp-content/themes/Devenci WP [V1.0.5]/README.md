@@ -64,7 +64,7 @@ If automatic import does not run, open **Appearance → Dev Venci Setup** and cl
 
 ### Group homepage
 
-Open **Pages → TeamKU-4A → Edit**. The hero and the four member cards are normal blocks. Each **Member Card** block has an inspector panel for its portrait, alt text, animation delay, and portfolio URL.
+Open **Pages → TeamKU-4A → Edit**. The hero, four member cards, and About section are normal blocks. The About section is added to existing homepages once if it is missing. Each **Member Card** block has an inspector panel for its portrait, alt text, animation delay, and portfolio URL.
 
 ### Member portfolios
 
