@@ -83,7 +83,7 @@
   --z: 4;
 }
 .members .member.member-position-4 {
-  --x: calc(70% + var(--member-gap-x) * 1.5);
+  --x: calc(76% + var(--member-gap-x) * 1.5);
   --y: 0%;
   --w: 40%;
   --z: 1;
@@ -226,8 +226,8 @@
     --z: 4;
   }
   .members .member.member-position-4 {
-    --x: 80%;
-    --w: 38%;
+    --x: 85%;
+    --w: 36%;
     --y: 10%;
   }
 
