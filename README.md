@@ -1,4 +1,4 @@
-# ATLAS-DEVS - Group KU 4A
+# ATLAS-DEVS [ 4A ]
 
 The official portfolio for **ATLAS-DEVS**, a four-member student development team focused on cloud computing, web engineering, UI/UX design, and emerging technologies.
 
