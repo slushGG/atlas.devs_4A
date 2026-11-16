@@ -261,6 +261,20 @@
     var alphaMaps = new Map();
     var activeMember = null;
 
+    members.forEach(function (member, index) {
+      if (index >= 4) {
+        return;
+      }
+
+      Array.prototype.slice.call(member.classList).forEach(function (className) {
+        if (/^member-position-[1-4]$/.test(className)) {
+          member.classList.remove(className);
+        }
+      });
+
+      member.classList.add("member-position-" + (index + 1));
+    });
+
     function getAlphaMap(img) {
       if (alphaMaps.has(img)) {
         return alphaMaps.get(img);
