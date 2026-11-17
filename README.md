@@ -74,7 +74,7 @@ HTML5, CSS3, JavaScript, Laravel, MySQL, React Native, Expo, and Laragon.
     ├── wp-content/
     │   ├── plugins/                  # Installed plugins
     │   └── themes/
-    │       └── Devenci WP [V1.0.5]/  # Custom block theme
+    │       └── Devenci WP [V1.0.8]/  # Custom block theme
     │           ├── assets/
     │           │   ├── content/      # Editable homepage block content source
     │           │   ├── css/          # Theme and editor styles
